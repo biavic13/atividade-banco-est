@@ -1,0 +1,18 @@
+-- Criar banco de dados
+CREATE DATABASE livros_catalogo CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE livros_catalogo;
+
+-- Criar tabela de livros
+CREATE TABLE livros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100),
+    autor VARCHAR(100),
+    genero VARCHAR(50),
+    ano INT
+);
+
+-- Inserir alguns registros de exemplo
+INSERT INTO livros (titulo, autor, genero, ano) VALUES
+('Dom Casmurro', 'Machado de Assis', 'Romance', 1899),
+('O Hobbit', 'J.R.R. Tolkien', 'Fantasia', 1937),
+('A Revolução dos Bichos', 'George Orwell', 'Sátira', 1945);

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>📚 Catálogo de Livros</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #9b72ff, #5d8bf4);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 500px;
+      margin-top: 50px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #6a4df0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #4e8ce6;
+      margin-top: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    input, button {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #7c5ae6;
+      box-shadow: 0 0 5px #7c5ae6;
+    }
+
+    button {
+      background: linear-gradient(to right, #8a4ff0 50%, #5a89f0 50%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #9b5cf5 50%, #698bf7 50%);
+    }
+
+    ul {
+      margin-top: 20px;
+      padding-left: 0;
+    }
+
+    li {
+      list-style: none;
+      padding: 8px 12px;
+      background-color: #f1f1f1;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    li:hover {
+      background-color: #e1d3f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚<br>Meu Catálogo de Livros</h1>
+
+    <ul id="lista-livros"></ul>
+
+    <h2>Adicionar Novo Livro</h2>
+    <form id="form-livro">
+      <input type="text" id="titulo" placeholder="Título do livro" required>
+      <input type="text" id="autor" placeholder="Autor" required>
+      <input type="text" id="genero" placeholder="Gênero" required>
+      <input type="number" id="ano" placeholder="Ano de publicação" required>
+      <button type="submit">Adicionar ao Catálogo</button>
+    </form>
+  </div>
+
+  <script>
+    // Lista inicial de livros (aparece ao abrir a página)
+    const livros = [
+      { titulo: "Dom Casmurro", autor: "Machado de Assis", genero: "Romance", ano: 1899 },
+      { titulo: "O Hobbit", autor: "J.R.R. Tolkien", genero: "Fantasia", ano: 1937 },
+      { titulo: "A Revolução dos Bichos", autor: "George Orwell", genero: "Sátira", ano: 1945 }
+    ];
+
+    // Função que exibe os livros na tela
+    function carregarLivros() {
+      const lista = document.getElementById('lista-livros');
+      lista.innerHTML = '';
+
+      livros.forEach(l => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${l.titulo}</strong> - ${l.autor} (${l.ano}) <em>${l.genero}</em>`;
+        lista.appendChild(li);
+      });
+    }
+
+    // Adiciona um novo livro à lista ao clicar no botão
+    document.getElementById('form-livro').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const titulo = document.getElementById('titulo').value.trim();
+      const autor = document.getElementById('autor').value.trim();
+      const genero = document.getElementById('genero').value.trim();
+      const ano = parseInt(document.getElementById('ano').value);
+
+      if (!titulo || !autor || !genero || !ano) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+      }
+
+      // Adiciona o novo livro
+      livros.push({ titulo, autor, genero, ano });
+
+      // Atualiza a lista e limpa o formulário
+      carregarLivros();
+      e.target.reset();
+    });
+
+    // Exibe os livros ao abrir a página
+    carregarLivros();
+  </script>
+</body>
+</html>
+
